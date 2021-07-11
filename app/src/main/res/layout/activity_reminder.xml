@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reminder.ReminderActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/remtitle"
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="Title"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:hint="Description"
+        android:layout_margin="20dp"
+        android:id="@+id/remdescription"
+        app:layout_constraintTop_toBottomOf="@id/remtitle"
+        app:layout_constraintBottom_toTopOf="@id/remdate"
+        />
+
+    <EditText
+        android:id="@+id/remdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Set Date"
+        app:layout_constraintBottom_toTopOf="@id/remtime"
+        />
+
+    <EditText
+        android:id="@+id/remtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Set Time"
+        app:layout_constraintBottom_toTopOf="@id/remsave_btn"
+        />
+
+    <Button
+        android:id="@+id/remsave_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="SAVE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
