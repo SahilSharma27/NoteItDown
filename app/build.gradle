@@ -26,10 +26,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    configurations {
-        cleanedAnnotations
-            compile.exclude group: 'org.jetbrains' , module :'annotations'
-    }
+//    configurations {
+//        cleanedAnnotations
+//            compile.exclude group: 'org.jetbrains' , module :'annotations'
+//    }
 }
 
 dependencies {

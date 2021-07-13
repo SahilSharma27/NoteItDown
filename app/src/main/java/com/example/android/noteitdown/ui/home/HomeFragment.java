@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.noteitdown.R;
+import com.example.android.noteitdown.simplenote.AppDatabase;
 import com.example.android.noteitdown.simplenote.Note;
 import com.example.android.noteitdown.ui.NoteAdapter;
 import com.example.android.noteitdown.ui.OnNoteClickListener;
@@ -19,11 +20,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
-    public  static ArrayList<Note> allnotes;
+    public  static List<Note> allnotes;
     RecyclerView recyclerView;
     public static NoteAdapter adapter;
+    AppDatabase db;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -33,24 +36,18 @@ public class HomeFragment extends Fragment {
 
 
         allnotes = new ArrayList<>();
-        String x = "27/12/2021";
-        Date d = null;
-        try {
-            d = new SimpleDateFormat("dd/MM/yyyy").parse(x);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Note n = new Note();
-        n.setTitle("h1");
-        n.setDescription("xfghjkl");
-        n.setDateOfCreation(d);
-        allnotes.add(n);
+
+        db = AppDatabase.getDBInstance(root.getContext().getApplicationContext());
+        allnotes =  db.notesdao().getAllNotes();
+
 
         recyclerView = root.findViewById(R.id.notesRCV);
         adapter = new NoteAdapter(getContext(), allnotes, new OnNoteClickListener() {
             @Override
             public void onNoteItemClick(View view, int position) {
-
+                db.notesdao().deleteNote(allnotes.get(position));
+                allnotes.remove(position);
+                adapter.notifyDataSetChanged();
             }
         });
 

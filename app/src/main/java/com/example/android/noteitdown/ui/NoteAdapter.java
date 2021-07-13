@@ -12,13 +12,14 @@ import com.example.android.noteitdown.R;
 import com.example.android.noteitdown.simplenote.Note;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteViewHolder> {
     Context context;
     OnNoteClickListener listener;
-    ArrayList<Note> notesList;
+    List<Note> notesList;
 
-    public NoteAdapter(Context context, ArrayList<Note> notesList, OnNoteClickListener listener){
+    public NoteAdapter(Context context, List<Note> notesList, OnNoteClickListener listener){
         this.context=context;
         this.listener=listener;
         this.notesList=notesList;
@@ -39,7 +40,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteViewHolder> {
     Note tempNote = notesList.get(position);
     holder.title.setText(tempNote.getTitle());
     holder.desc.setText(tempNote.getDescription());
-    holder.date.setText(tempNote.getDateOfCreation().toString().substring(0,9));
+    holder.date.setText(tempNote.getDateOfCreation().toString().substring(0,10));
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override

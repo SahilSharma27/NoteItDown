@@ -1,11 +1,23 @@
 package com.example.android.noteitdown.simplenote;
 
-import java.util.Date;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.Date;
+@Entity
 public class Note {
+    @PrimaryKey(autoGenerate = true)
+    public int noteid;
+
+    @ColumnInfo(name = "NoteTitle")
     private String Title;
+
+    @ColumnInfo(name = "NoteDescription")
     private String Description;
-    private Date dateOfCreation;
+
+    @ColumnInfo(name = "NoteDOC")
+    private String dateOfCreation;
 
 
     public void setTitle(String title) {
@@ -16,8 +28,8 @@ public class Note {
         Description = description;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
+    public String getDateOfCreation() {
+        return dateOfCreation;
     }
 
     public String getTitle() {
@@ -28,7 +40,7 @@ public class Note {
         return Description;
     }
 
-    public Date getDateOfCreation() {
-        return dateOfCreation;
+    public void setDateOfCreation(String dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
     }
 }

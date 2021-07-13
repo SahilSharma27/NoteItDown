@@ -38,9 +38,13 @@ public class TakeNoteActivity extends AppCompatActivity {
             Note newNote = new Note();
             newNote.setTitle(titleView.getText().toString());
             newNote.setDescription((descriptionView.getText().toString()));
-            newNote.setDateOfCreation(date);
-            HomeFragment.allnotes.add(newNote);
-            HomeFragment.adapter.notifyDataSetChanged();
+            newNote.setDateOfCreation(date.toString());
+
+            AppDatabase db = AppDatabase.getDBInstance(this.getApplicationContext());
+            db.notesdao().saveNote(newNote);
+
+//            HomeFragment.allnotes.add(newNote);
+//            HomeFragment.adapter.notifyDataSetChanged();
 
         });
 
