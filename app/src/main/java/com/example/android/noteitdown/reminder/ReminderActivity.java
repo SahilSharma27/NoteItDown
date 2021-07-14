@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +12,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.example.android.noteitdown.AppDatabase;
 import com.example.android.noteitdown.R;
+import com.example.android.noteitdown.ui.MenuActivity;
 
 import java.util.Calendar;
 
@@ -77,6 +80,24 @@ public class ReminderActivity extends AppCompatActivity {
                         },hour,minute,false);
                 timePickerDialog.show();
             }
+        });
+
+
+        saveRemBtn.setOnClickListener(view -> {
+
+            Reminder newrem =  new Reminder();
+            newrem.setRemtitle(titleET.getText().toString());
+            newrem.setRemDescription(desET.getText().toString());
+            newrem.setRemTime(timeET.getText().toString());
+            newrem.setRemDate(dateET.getText().toString());
+            newrem.setRemPriority(1);
+
+            AppDatabase db = AppDatabase.getDBInstance(this.getApplicationContext());
+            db.remsdao().saveReminder(newrem);
+
+            Intent intent = new Intent(this,MenuActivity.class);
+            startActivity(intent);
+
         });
 
 

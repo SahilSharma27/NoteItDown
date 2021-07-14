@@ -10,9 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.android.noteitdown.R;
-import com.example.android.noteitdown.simplenote.AppDatabase;
-import com.example.android.noteitdown.ui.NoteAdapter;
-import com.example.android.noteitdown.ui.OnNoteClickListener;
+import com.example.android.noteitdown.AppDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +80,7 @@ public class PasswordActivity extends AppCompatActivity implements SavePassDialo
         AppDatabase db = AppDatabase.getDBInstance(this.getApplicationContext());
 
         db.passDao().savePass(newPass);
+        adapter.notifyDataSetChanged();
         Toast.makeText(PasswordActivity.this,"Password Saved",Toast.LENGTH_LONG).show();
     }
 

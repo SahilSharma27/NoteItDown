@@ -9,24 +9,43 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.Chronometer;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.noteitdown.R;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class AudioNoteActivity extends AppCompatActivity {
-    MediaRecorder mediaRecorder;
-    TextView textView ;
 
-    public static String fileName = "recorded.3gp";
-
-    String file = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + fileName;
-
-
+  private static String fileName;
+    View view;
+    ImageButton btnRec;
+    TextView txtRecStatus;
+    Chronometer timeRec;
+    GifImageView gifView;
+    boolean isRecording;
+    File path = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/NoteItDown");
+ //   public static String fileName = "recorded4.3gp";
+    String file;
+    private MediaRecorder mediaRecorder;
+//    String file = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + fileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,55 +53,171 @@ public class AudioNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_audio_note);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        btnRec =  findViewById(R.id.btnRec);
+        txtRecStatus = findViewById(R.id.txtRecStatus);
+        gifView =  findViewById(R.id.gifview);
+        timeRec = findViewById(R.id.timeRec);
+
+        isRecording =false;
+
+        askRuntimePermission();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyyyMMdd_HHmmss", Locale.getDefault());
+        String date = format.format(new Date());
+//        fileName = "/recording_" +date +".3gp";
+//        file = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + fileName;
+//        file = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + fileName;
+
+        fileName = path +"/recording_" +date +".3gp";
+
+//        if(path.exists()){
+//            path.mkdirs();
+//        }
+
+        btnRec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isRecording){
+                    try {
+                        startRecording();
+                        gifView.setVisibility(View.VISIBLE);
+                        timeRec.setBase(SystemClock.elapsedRealtime());
+                        timeRec.start();
+                        txtRecStatus.setText("Recording...");
+                        btnRec.setImageResource(R.drawable.ic_baseline_stop_24);
+                        isRecording = true;
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), e.getMessage()+"Couldn't Record", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if(isRecording){
+//                    mediaRecorder.stop();
+//                    mediaRecorder.reset();
+
+                    stopRecording();
+                    gifView.setVisibility(View.GONE);
+                    timeRec.setBase(SystemClock.elapsedRealtime());
+                    timeRec.stop();
+                    txtRecStatus.setText("");
+                    btnRec.setImageResource(R.drawable.ic_baseline_mic_24);
+                    isRecording =false;
+                }
+            }
+        });
 
 
 
-        textView = findViewById(R.id.textview);
+    }
+
+    private void startRecording(){
+
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+//        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
         mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
 
-        mediaRecorder.setOutputFile(file);
+        mediaRecorder.setOutputFile(fileName);
+        record();
+
+//        try {
+//            mediaRecorder.prepare();
+//            mediaRecorder.start();
+//
+//        }catch (IOException e){
+//            e.printStackTrace();
+//            Toast.makeText(this,"Something Went Wrong",Toast.LENGTH_SHORT);
+//        }
+
+
     }
 
-    public void onClick(View v){
-        if(v.getId() == R.id.buttonRecord){
-            //Record
-            record();
-        }
-        else if(v.getId() == R.id.buttonStop){
-            //Stop
-            stopAudio();
-        }else if(v.getId() == R.id.buttonPlay){
-            //Play
-            play();
-        }
+    private void stopRecording() {
+        stopAudio();
+//        if(mediaRecorder != null){
+//            mediaRecorder.stop();
+//            mediaRecorder.release();
+//            mediaRecorder = null;
+//        }
     }
 
-    private void play() {
-        MediaPlayer mediaPlayer = new MediaPlayer();
-        try {
-            mediaPlayer.setDataSource(file);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        textView.setText("Playing Recorded Audio ...");
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+    private void askRuntimePermission() {
+        Dexter.withContext(getApplicationContext()).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.RECORD_AUDIO).withListener(new MultiplePermissionsListener() {
             @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                textView.setText("Audio finished!");
-                mediaPlayer.release();
+            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                Toast.makeText(getApplicationContext(),"Granted!",Toast.LENGTH_LONG).show();
             }
-        });
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                permissionToken.continuePermissionRequest();
+            }
+        }).check();
+
     }
+
+//    MediaRecorder mediaRecorder;
+//    TextView textView ;
+//
+//    public static String fileName = "recorded2.3gp";
+//
+//    String file = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + fileName;
+//
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//        textView = findViewById(R.id.textview);
+//        mediaRecorder = new MediaRecorder();
+//        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+//        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+//        mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+//
+//        mediaRecorder.setOutputFile(file);
+//    }
+
+//    public void onClick(View v){
+//        if(v.getId() == R.id.buttonRecord){
+//            //Record
+//            record();
+//        }
+//        else if(v.getId() == R.id.buttonStop){
+//            //Stop
+//            stopAudio();
+//        }else if(v.getId() == R.id.buttonPlay){
+//            //Play
+//            play();
+//        }
+//    }
+
+//    private void play() {
+//        MediaPlayer mediaPlayer = new MediaPlayer();
+//        try {
+//            mediaPlayer.setDataSource(file);
+//            mediaPlayer.prepare();
+//            mediaPlayer.start();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        textView.setText("Playing Recorded Audio ...");
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mediaPlayer) {
+//                textView.setText("Audio finished!");
+//                mediaPlayer.release();
+//            }
+//        });
+//    }
 
     private void stopAudio() {
         mediaRecorder.stop();
         mediaRecorder.release();
-        textView.setText("Recording Stopped!");
+        txtRecStatus.setText("Recording Stopped!");
     }
 
     private void record() {
@@ -93,10 +228,10 @@ public class AudioNoteActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this,"Something Went Wrong",Toast.LENGTH_SHORT);
         }
-        textView.setText("Audio Recording.....");
+        txtRecStatus.setText("Audio Recording.....");
 
     }
-
-
-
 }
+
+
+

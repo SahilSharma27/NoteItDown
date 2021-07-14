@@ -1,64 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="4"
     tools:context=".audionote.AudioNoteActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Record Audio Note!"
-        android:layout_marginBottom="50dp"
-        android:textColor="@color/design_default_color_primary"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@id/buttonRecord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/txtRecStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textSize="32sp"/>
 
-    <ImageButton
-        android:id="@+id/buttonRecord"
-        android:layout_width="70dp"
-        android:layout_height="60dp"
-        android:background="@drawable/ic_baseline_mic_24"
-        android:onClick="onClick"
-        app:layout_constraintBottom_toTopOf="@+id/textview"
-        app:layout_constraintEnd_toStartOf="@+id/buttonStop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mygif"
+            android:visibility="gone">
 
-    <ImageButton
-        android:id="@+id/buttonStop"
-        android:layout_width="70dp"
-        android:layout_height="60dp"
-        android:background="@drawable/ic_baseline_stop_24"
-        android:onClick="onClick"
-        app:layout_constraintBottom_toTopOf="@+id/textview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        </pl.droidsonroids.gif.GifImageView>
+        <Chronometer
+            android:id="@+id/timeRec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textAlignment="center"
+            android:textSize="30sp"
         />
 
-    <ImageButton
-        android:id="@+id/buttonPlay"
-        android:layout_width="70dp"
-        android:layout_height="60dp"
-        android:background="@drawable/ic_baseline_play_arrow_24"
-        android:onClick="onClick"
-        app:layout_constraintBottom_toTopOf="@+id/textview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonStop"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
-        android:text="Hello"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/textview"/>
+        android:orientation="vertical">
+    <ImageButton
+        android:layout_width="70dp"
+        android:id="@+id/btnRec"
+        android:layout_height="70dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/round_btn"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_mic_24"/>
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
+
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".audionote.AudioNoteActivity">-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="120dp"-->
+<!--        android:text="00:00"-->
+<!--        android:background="@drawable/custom1"-->
+<!--        android:padding="32dp"-->
+<!--        android:textColor="@color/design_default_color_primary"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:textSize="40sp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:id="@+id/temp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Record Audio Note!"-->
+<!--        android:layout_marginBottom="50dp"-->
+
+<!--        android:textColor="@color/design_default_color_primary"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/temp"-->
+<!--        android:textSize="30sp"-->
+<!--        android:id="@+id/temp1"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        app:layout_constraintTop_toBottomOf="@id/temp1"-->
+<!--        android:layout_margin="16dp"-->
+<!--        app:cardCornerRadius="8dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:foregroundGravity="center"-->
+<!--        android:layout_height="100dp">-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_height="match_parent">-->
+<!--            <ImageButton-->
+<!--                android:id="@+id/buttonRecord"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/ic_baseline_mic_24"-->
+<!--                android:onClick="onClick"-->
+<!--                android:padding="16dp"-->
+<!--                android:layout_marginEnd="32dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/textview"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/buttonStop"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <ImageButton-->
+<!--                android:layout_gravity="center"-->
+<!--                android:id="@+id/buttonStop"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/ic_baseline_stop_24"-->
+<!--                android:onClick="onClick"-->
+<!--                android:padding="16dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/textview"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                />-->
+
+<!--            <ImageButton-->
+<!--                android:id="@+id/buttonPlay"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:padding="16dp"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:background="@drawable/ic_baseline_play_arrow_24"-->
+<!--                android:onClick="onClick"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/textview"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/buttonStop"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        </LinearLayout>-->
+<!--    </androidx.cardview.widget.CardView>-->
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Hello"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:id="@+id/textview"/>-->
+
+<!--    <Button-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Save"-->
+<!--        android:layout_margin="8dp"-->
+<!--        android:id="@+id/save_audio_note"/>-->
+
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

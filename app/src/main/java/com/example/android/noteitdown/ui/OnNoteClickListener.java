@@ -4,4 +4,5 @@ import android.view.View;
 
 public interface OnNoteClickListener {
     void onNoteItemClick(View view,int position);
+    void onNoteItemLongClick(View view ,int position);
 }

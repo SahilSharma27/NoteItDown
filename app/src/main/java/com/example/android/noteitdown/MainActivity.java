@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.ic_baseline_mic_24);
+        fab.setImageResource(android.R.drawable.ic_input_add);
+        fab.setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

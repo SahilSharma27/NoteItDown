@@ -3,13 +3,15 @@ package com.example.android.noteitdown.simplenote;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.android.noteitdown.AppDatabase;
 import com.example.android.noteitdown.R;
-import com.example.android.noteitdown.ui.home.HomeFragment;
+import com.example.android.noteitdown.ui.MenuActivity;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -43,6 +45,9 @@ public class TakeNoteActivity extends AppCompatActivity {
             AppDatabase db = AppDatabase.getDBInstance(this.getApplicationContext());
             db.notesdao().saveNote(newNote);
 
+//            Intent intent = new Intent(this, MenuActivity.class);
+//            startActivity(intent);
+            finish();
 //            HomeFragment.allnotes.add(newNote);
 //            HomeFragment.adapter.notifyDataSetChanged();
 

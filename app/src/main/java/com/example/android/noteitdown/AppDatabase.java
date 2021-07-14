@@ -1,4 +1,4 @@
-package com.example.android.noteitdown.simplenote;
+package com.example.android.noteitdown;
 
 import android.content.Context;
 
@@ -8,8 +8,15 @@ import androidx.room.RoomDatabase;
 
 import com.example.android.noteitdown.password.PassDao;
 import com.example.android.noteitdown.password.PassWord;
+import com.example.android.noteitdown.reminder.RemDao;
+import com.example.android.noteitdown.reminder.Reminder;
+import com.example.android.noteitdown.simplenote.Note;
+import com.example.android.noteitdown.simplenote.NotesDao;
 
-@Database(entities = {Note.class, PassWord.class}, version  = 1,exportSchema = false )
+@Database(entities = {  Note.class,
+                        PassWord.class,
+                        Reminder.class
+                    }, version  = 1,exportSchema = false )
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -23,7 +30,9 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    public abstract  NotesDao notesdao();
+    public abstract NotesDao notesdao();
 
-    public abstract PassDao passDao();
+    public abstract RemDao remsdao();
+
+     public abstract PassDao passDao();
 }

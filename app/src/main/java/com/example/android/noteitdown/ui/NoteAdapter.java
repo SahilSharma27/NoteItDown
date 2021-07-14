@@ -1,9 +1,11 @@
 package com.example.android.noteitdown.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +50,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteViewHolder> {
             listener.onNoteItemClick(view,holder.getAbsoluteAdapterPosition());
         }
     });
+
+    holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View view) {
+            Toast.makeText(context,"Long Clicked",Toast.LENGTH_LONG).show();
+            listener.onNoteItemLongClick(view,holder.getAbsoluteAdapterPosition());
+            return false;
+        }
+    });
+
+
     }
 
     @Override
