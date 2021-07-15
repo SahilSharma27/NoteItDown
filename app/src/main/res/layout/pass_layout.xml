@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:layout_margin="8dp"
-    android:backgroundTint="@color/design_default_color_primary"
+    android:backgroundTint="@color/black"
     app:cardCornerRadius="10dp"
     >
     <LinearLayout
@@ -29,12 +29,11 @@
                 android:textColor="@color/white"
                 android:textSize="25sp"/>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:padding="4dp"
-                android:src="@drawable/ic_baseline_remove_red_eye_24"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_remove_red_eye_24" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

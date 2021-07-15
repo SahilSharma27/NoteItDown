@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,12 +14,19 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NoteItDown">
-        <activity android:name=".audionote.AudioNoteActivity"
-            android:parentActivityName=".ui.MenuActivity"/>
+        android:theme="@style/Theme.AppCompat">
+        <activity
+            android:name=".canvas.CanvasActivity"
+            android:parentActivityName=".ui.MenuActivity">
+
+        </activity>
+        <!-- android:theme="@style/Theme.NoteItDown"> -->
+        <activity
+            android:name=".audionote.AudioNoteActivity"
+            android:parentActivityName=".ui.MenuActivity" />
         <activity
             android:name=".speechtotextnote.SpeechToTextActivity"
-            android:parentActivityName=".ui.MenuActivity"/>
+            android:parentActivityName=".ui.MenuActivity" />
         <activity
             android:name=".password.PasswordActivity"
             android:parentActivityName=".ui.MenuActivity" />
@@ -34,8 +41,8 @@
             android:parentActivityName=".ui.MenuActivity" />
         <activity
             android:name=".ui.MenuActivity"
-            android:theme="@style/Theme.NoteItDown.NoActionBar"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -47,6 +54,7 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".reminder.AlarmReceiver" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -55,9 +63,8 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
-
     </application>
 
 </manifest>

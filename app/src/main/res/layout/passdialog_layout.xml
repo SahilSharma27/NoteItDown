@@ -1,47 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter Title"/>
     <EditText
+        android:id="@+id/pass_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/pass_title"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter User Name"/>
+        android:hint="Enter title" />
+
     <EditText
+        android:id="@+id/pass_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/pass_user_name"/>
-    <TextView
+        android:hint="Enter Username" />
+
+    <EditText
+        android:id="@+id/pass_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Password"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/pass_password"
-            android:inputType="textPassword"/>
-        <Button
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_baseline_remove_red_eye_24"
-            android:padding="8dp"
+        android:hint="Enter your password"
+        android:inputType="textPassword"
+        app:passwordToggleEnabled="true" />
 
-            android:id="@+id/see_pass"/>
-    </LinearLayout>
+    <CheckBox
+        android:id="@+id/show_pass_check"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:checked="false"
+        android:shadowColor="@color/design_default_color_primary"
+        android:text="Show Pass" />
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.android.noteitdown.ui.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,17 +11,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.noteitdown.R;
 import com.example.android.noteitdown.AppDatabase;
+import com.example.android.noteitdown.R;
 import com.example.android.noteitdown.reminder.OnRemClickListener;
 import com.example.android.noteitdown.reminder.Reminder;
+import com.example.android.noteitdown.reminder.ReminderActivity;
 import com.example.android.noteitdown.reminder.ReminderAdapter;
 import com.example.android.noteitdown.simplenote.Note;
-import com.example.android.noteitdown.ui.NoteAdapter;
-import com.example.android.noteitdown.ui.OnNoteClickListener;
+import com.example.android.noteitdown.simplenote.TakeNoteActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +35,13 @@ public class HomeFragment extends Fragment {
 
     AppDatabase db;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+
         recyclerView = root.findViewById(R.id.notesRCV);
         recyclerView1= root.findViewById(R.id.remsRCV);
 
@@ -54,6 +58,10 @@ public class HomeFragment extends Fragment {
         adapter = new NoteAdapter(getContext(), allnotes, new OnNoteClickListener() {
             @Override
             public void onNoteItemClick(View view, int position) {
+                Intent intent = new Intent(getContext(), TakeNoteActivity.class);
+                intent.putExtra("Title", allnotes.get(position).getTitle());
+                intent.putExtra("Description", allnotes.get(position).getDescription());
+                startActivity(intent);
 
             }
 
@@ -75,23 +83,31 @@ public class HomeFragment extends Fragment {
                             }
                         })
 
-                        // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                                // A null listener allows the button to dismiss the dialog and take no further action.
+                                .setNegativeButton(android.R.string.no, null)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
 
             }
         });
 
         adapter.notifyDataSetChanged();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setReverseLayout(true);
+
+        GridLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
+//        linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
         adapter1 = new ReminderAdapter(getContext(), allRems, new OnRemClickListener() {
             @Override
             public void onRemItemClick(View view, int position) {
+                Intent intent = new Intent(getContext(), ReminderActivity.class);
+                intent.putExtra("Title", allRems.get(position).getRemtitle());
+                intent.putExtra("Description", allRems.get(position).getRemDescription());
+                intent.putExtra("Date", allRems.get(position).getRemDate());
+                intent.putExtra("Time", allRems.get(position).getRemTime());
+
+                startActivity(intent);
 
             }
 
@@ -121,8 +137,8 @@ public class HomeFragment extends Fragment {
         });
 
         adapter1.notifyDataSetChanged();
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
-        linearLayoutManager1.setReverseLayout(true);
+        GridLayoutManager linearLayoutManager1 = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
+//        linearLayoutManager1.setReverseLayout(true);
         recyclerView1.setLayoutManager(linearLayoutManager1);
         recyclerView1.setAdapter(adapter1);
 

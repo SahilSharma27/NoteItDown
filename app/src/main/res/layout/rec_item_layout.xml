@@ -4,18 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:layout_margin="8dp"
-    android:backgroundTint="@color/design_default_color_primary"
+    android:backgroundTint="@color/card"
     app:cardCornerRadius="10dp"
-    >
-<LinearLayout
-    android:id="@+id/rec_container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_margin="8dp"
-    android:background="@color/design_default_color_primary"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:outlineAmbientShadowColor="@color/design_default_color_primary"
+    android:outlineSpotShadowColor="@color/design_default_color_primary">
+
+    <LinearLayout
+        android:id="@+id/rec_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:background="@color/card"
+        android:gravity="center"
+        android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/imgRec"
@@ -32,11 +34,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:ellipsize="marquee"
+        android:textColor="@color/white"
         android:gravity="center_vertical"
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:textColor="@color/white"
         android:textSize="24sp"
         />
 

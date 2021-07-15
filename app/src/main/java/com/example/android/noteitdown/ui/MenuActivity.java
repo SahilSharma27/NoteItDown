@@ -1,14 +1,15 @@
 package com.example.android.noteitdown.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.example.android.noteitdown.R;
 import com.example.android.noteitdown.audionote.AudioNoteActivity;
+import com.example.android.noteitdown.canvas.CanvasActivity;
 import com.example.android.noteitdown.password.PasswordActivity;
 import com.example.android.noteitdown.reminder.ReminderActivity;
 import com.example.android.noteitdown.simplenote.TakeNoteActivity;
@@ -74,6 +75,12 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        BoardCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startNextActivity(CanvasActivity.class);
+            }
+        });
     }
 
     public void startNextActivity(Class activity){

@@ -1,6 +1,5 @@
-package com.example.android.noteitdown.ui;
+package com.example.android.noteitdown.ui.home;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.noteitdown.R;
 import com.example.android.noteitdown.simplenote.Note;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteViewHolder> {
@@ -42,7 +40,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteViewHolder> {
     Note tempNote = notesList.get(position);
     holder.title.setText(tempNote.getTitle());
     holder.desc.setText(tempNote.getDescription());
-    holder.date.setText(tempNote.getDateOfCreation().toString().substring(0,10));
+        // holder.date.setText(tempNote.getDateOfCreation().toString().substring(0,10));
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override

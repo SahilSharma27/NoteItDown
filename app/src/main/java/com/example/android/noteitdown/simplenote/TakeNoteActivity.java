@@ -1,17 +1,16 @@
 package com.example.android.noteitdown.simplenote;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.android.noteitdown.AppDatabase;
 import com.example.android.noteitdown.R;
-import com.example.android.noteitdown.ui.MenuActivity;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -29,9 +28,15 @@ public class TakeNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_take_note);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Intent intent = getIntent();
+
+
         titleView = findViewById(R.id.title);
         descriptionView = findViewById(R.id.description);
         saveBtn = findViewById(R.id.save_btn);
+
+        titleView.setText(intent.getStringExtra("Title"));
+        descriptionView.setText(intent.getStringExtra("Description"));
 
         saveBtn.setOnClickListener(view -> {
             //doubt

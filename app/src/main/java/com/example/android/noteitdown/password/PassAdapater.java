@@ -9,13 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.noteitdown.R;
-import com.example.android.noteitdown.simplenote.Note;
-import com.example.android.noteitdown.ui.NoteViewHolder;
-import com.example.android.noteitdown.ui.OnNoteClickListener;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class PassAdapater extends RecyclerView.Adapter<PassViewHolder> {

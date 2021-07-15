@@ -1,4 +1,4 @@
-package com.example.android.noteitdown.ui;
+package com.example.android.noteitdown.ui.home;
 
 import android.view.View;
 

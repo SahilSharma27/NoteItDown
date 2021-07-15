@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.example.android.noteitdown"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -21,6 +21,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    buildFeatures{
+        viewBinding true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -52,4 +58,8 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
     implementation 'com.karumi:dexter:6.2.2'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
+    implementation 'androidx.biometric:biometric:1.1.0'
+    implementation 'com.kyanogen.signatureview:signature-view:1.2'
+//    implementation 'com.github.yakuku:ambilwarna:2.0.1'
+
 }

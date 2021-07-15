@@ -1,4 +1,4 @@
-package com.example.android.noteitdown.ui;
+package com.example.android.noteitdown.ui.home;
 
 import android.view.View;
 import android.widget.TextView;
@@ -19,6 +19,6 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
         this.itemView =  itemView;
         this.title = itemView.findViewById(R.id.noteTitle);
         this.desc = itemView.findViewById(R.id.notedescription);
-        this.date =  itemView.findViewById(R.id.notedate);
+        // this.date =  itemView.findViewById(R.id.notedate);
     }
 }

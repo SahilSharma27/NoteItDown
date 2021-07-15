@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_width="160dp"
+    android:layout_height="100dp"
     android:layout_margin="8dp"
+    android:outlineAmbientShadowColor="@color/biometric_error_color"
+    android:outlineSpotShadowColor="@color/biometric_error_color"
     app:cardCornerRadius="10dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/design_default_color_primary"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <ImageView
@@ -22,16 +25,19 @@
                 android:layout_gravity="center"
                 android:padding="8dp"
                 android:src="@drawable/reminder"/>
+
             <TextView
                 android:id="@+id/rem_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:padding="8dp"
                 android:text="hello"
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
 
             <ImageView
@@ -49,9 +55,10 @@
             android:id="@+id/rem_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="5"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:padding="10dp"
-            android:textSize="20sp"/>
+            android:textSize="15sp" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
